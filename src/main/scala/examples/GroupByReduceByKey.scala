@@ -24,5 +24,8 @@ object GroupByReduceByKey {
       .map(t => (t._1, t._2.sum))
       .collect()
     wordCountsWithGroup.foreach(f => println(f))
+
+
+    
   }
 }
