@@ -26,6 +26,6 @@ object GroupByReduceByKey {
     wordCountsWithGroup.foreach(f => println(f))
 
 
-    
+
   }
 }
