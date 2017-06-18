@@ -4,7 +4,7 @@ package QueryPlanner
 import Util.Utils
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.DataFrame
-import org.apache.spark.sql.catalyst.analysis.EliminateSubQueries
+//import org.apache.spark.sql.catalyst.analysis.EliminateSubQueries
 import org.apache.spark.sql.catalyst.optimizer._
 
 
@@ -14,7 +14,7 @@ import org.apache.spark.sql.catalyst.optimizer._
 object StepsInQueryPlanning {
   def main(args: Array[String]) {
 
-    val sc = new SparkContext(args(0), "Csv loading example")
+    /*val sc = new SparkContext(args(0), "Csv loading example")
     val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 
 
@@ -73,7 +73,7 @@ object StepsInQueryPlanning {
 
     val phyzicalPlan = new DataFrame(sqlContext, projectCollapse).queryExecution.executedPlan
 
-    println(phyzicalPlan.executeCollect().toList)
+    println(phyzicalPlan.executeCollect().toList)*/
 
 
   }
