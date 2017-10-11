@@ -1,4 +1,4 @@
-import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
@@ -12,10 +12,9 @@ object Basic {
     val conf = new SparkConf().setAppName("Ranking Example")
       .setMaster("local[4]")
 
-    val sc = new SparkContext(conf)
-    val sqlContext = new SQLContext(sc)
-
-    import sqlContext.implicits._
+    val spark: SparkSession = SparkSession.builder().master("local[4]").appName("QueryingWithStreamingSources").getOrCreate()
+    val sc: SparkContext = spark.sparkContext
+    import spark.implicits._
 
     // create a sequence of case class objects
     // (we defined the case class above)
@@ -53,9 +52,9 @@ object Basic {
 
     customerDF.filter($"state".equalTo("CA")).show()
 
-    customerDF.registerTempTable("CustomerTable")
+    customerDF.createTempView("CustomerTable")
 
-    sqlContext.sql("select * from CustomerTable where state = 'CA'").show()
+    spark.sqlContext.sql("select * from CustomerTable where state = 'CA'").show()
 
   }
 }

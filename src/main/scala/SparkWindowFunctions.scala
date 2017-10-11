@@ -1,4 +1,4 @@
-import org.apache.spark.sql.{Dataset, SQLContext}
+import org.apache.spark.sql.{Dataset, SparkSession}
 import org.apache.spark.{SparkConf, SparkContext}
 
 
@@ -67,13 +67,12 @@ object SparkWindowFunctions {
     val conf = new SparkConf().setAppName("Ranking Example")
       .setMaster("local[4]")
 
-    val sc = new SparkContext(conf)
-    val sqlContext = new SQLContext(sc)
+    val spark: SparkSession = SparkSession.builder().master("local[4]").appName("QueryingWithStreamingSources").getOrCreate()
+    val sc: SparkContext = spark.sparkContext
+    import spark.implicits._
 
 
     case class Datum(product: String, category: String, revenue: Int)
-
-    import sqlContext.implicits._
 
     val customers = sc.parallelize(List(("Alice", "2016-05-01", 50.00),
       ("Alice", "2016-05-03", 45.00),
@@ -85,7 +84,6 @@ object SparkWindowFunctions {
     import org.apache.spark.sql.expressions.Window
     import org.apache.spark.sql.functions._
 
-    sqlContext.isInstanceOf[org.apache.spark.sql.hive.HiveContext]
 
     println("**************Customer DF **************")
     customers.show()
@@ -157,9 +155,9 @@ object SparkWindowFunctions {
 
     // If I want to go with the SPARK SQL.
 
-    testDF.registerTempTable("TestDF")
+    testDF.createTempView("TestDF")
 
-    sqlContext.sql("select user, rank() over (order by value) as RANK from TestDF").show()
+    spark.sqlContext.sql("select user, rank() over (order by value) as RANK from TestDF").show()
 
     //    if you want to convert an DF to an RDD.
 
@@ -175,23 +173,18 @@ object SparkWindowFunctions {
       ("10", "1000"), ("10", "1000"), ("10", "2000"), ("10", "3000"), ("20", "5000"), ("20", "6000"), ("20", "NULL")
     )).toDF("dept_id", "salary")
 
-    employeeSalaryDF.registerTempTable("EmployeeDF")
+    employeeSalaryDF.createTempView("EmployeeDF")
 
-    sqlContext.sql("select dept_id, salary, FIRST_VALUE(salary) over (order by (salary is not null), salary) first_sal from EmployeeDF").show()
-
-
-
-    import org.apache.spark.sql.functions.{coalesce, lit}
-    import sqlContext.implicits._
+    spark.sqlContext.sql("select dept_id, salary, FIRST_VALUE(salary) over (order by (salary is not null), salary) first_sal from EmployeeDF").show()
 
 
 
-    val df = sc.parallelize(Seq(
+    /*val df = sc.parallelize(Seq(
       Foobar(Some(1), Some(1235)), Foobar(Some(12345767), Some(2)),
       Foobar(None, Some(4)), Foobar(None, Some(1098)))).toDF()
 
     df.select(coalesce($"foo", $"bar", lit("--"))).show
-
+*/
     /*
 
     Returns the first column that is not null, or null if all inputs are null.
@@ -216,7 +209,7 @@ scala>
 
 
      */
-    df.select(coalesce($"foo", $"bar", lit("--"))).show
+//    df.select(coalesce($"foo", $"bar", lit("--"))).show
 
 
   }
