@@ -27,7 +27,7 @@ object LinearRegression {
     }.cache()
 
     // Build the model
-    var regression = new LinearRegressionWithSGD().setIntercept(true)
+    var regression = new LinearRegressionWithSGD().setIntercept(true)+
     regression.optimizer.setStepSize(0.1)
     val model = regression.run(parsedData)
 

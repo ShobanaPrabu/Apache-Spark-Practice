@@ -5,6 +5,7 @@ import java.nio.file.Paths
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.execution.aggregate.TypedAverage
+import org.apache.spark.sql.hive.HiveContext
 import org.apache.spark.sql.{DataFrame, Dataset, Row, TypedColumn}
 import org.apache.spark.sql.types._
 
@@ -20,6 +21,7 @@ object FeedbackExample {
 
   System.setProperty("hadoop.home.dir", "C:\\hadoop-common-2.2.0-bin-master\\")
 
+  val sqlContext = new HiveContext(sc)
   val spark: SparkSession =
     SparkSession
       .builder()
