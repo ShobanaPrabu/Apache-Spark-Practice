@@ -28,8 +28,8 @@ object CityRecommendator {
 */
 
 
-    val ratingsRDD = sc.textFile("C:\\Venkat_Downloads\\SparkWork-master\\src\\main\\resources\\CityRecommendation\\ratings.csv")
-    val cityRDD = sc.textFile("C:\\Venkat_Downloads\\SparkWork-master\\src\\main\\resources\\CityRecommendation\\city.csv")
+    val ratingsRDD = sc.textFile("src/main/resources/CityRecommendation/ratings.csv")
+    val cityRDD = sc.textFile("src/main/resources/CityRecommendation/city.csv")
 
 
 

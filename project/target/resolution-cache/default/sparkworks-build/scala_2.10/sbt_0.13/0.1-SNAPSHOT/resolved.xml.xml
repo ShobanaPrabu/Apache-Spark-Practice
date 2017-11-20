@@ -4,7 +4,7 @@
 		module="sparkworks-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20170615103619"
+		publication="20171108120707"
 		e:sbtVersion="0.13" e:scalaVersion="2.10"
 	>
 		<description>

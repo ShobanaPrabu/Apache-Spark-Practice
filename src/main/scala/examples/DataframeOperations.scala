@@ -19,7 +19,8 @@ object DataframeOperations {
     // Spark Session is the unified entry point for the Spark Application
 
 
-    //    Unified entry point for reading data SparkSession is the entry point for reading data, similar to the old SQLContext.read.
+    //    Unified entry point for reading data SparkSession is the entry point for reading data, similar to the
+    // old SQLContext.read.
     //    If you want to read the json, avro, parquet file and apply the compression. Use the unified spark
     // session entry point  sparkSession
 //    val jsonData = sparkSession.read.json("/home/webinar/person.json")

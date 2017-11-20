@@ -26,7 +26,7 @@ object SGDLinearRegression {
   def main(args: Array[String]): Unit = {
 
 
-    val data = spark.sparkContext.textFile("C:\\Venkat_Downloads\\SparkWork-master\\src\\main\\resources\\data\\ridge-data\\lpsa.data")
+    val data = spark.sparkContext.textFile("src/main/resources/data/ridge-data/lpsa.data")
 
     val parsedData = data.map { line =>
       val x : Array[String] = line.replace(",", " ").split(" ")

@@ -126,7 +126,7 @@ https://stackoverflow.com/questions/46580253/collect-list-by-preserving-order-ba
 
     val euclidean = udf((v1: Vector, v2: Vector) => ???)  // Fill with preferred logic
 
-    val jP2 = jP.withColumn("dist", euclidean($"features", $"episodeFeatures"))
+//    val jP2 = jP.withColumn("dist", euclidean($"features", $"episodeFeatures"))
 
 
 

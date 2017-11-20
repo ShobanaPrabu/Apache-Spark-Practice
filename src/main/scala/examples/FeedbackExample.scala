@@ -21,7 +21,7 @@ object FeedbackExample {
 
   System.setProperty("hadoop.home.dir", "C:\\hadoop-common-2.2.0-bin-master\\")
 
-  val sqlContext = new HiveContext(sc)
+  val sqlContext = spark.sqlContext
   val spark: SparkSession =
     SparkSession
       .builder()
@@ -34,7 +34,7 @@ object FeedbackExample {
 
   /** Main function */
   def main(args: Array[String]): Unit = {
-    //    val rawRDD = read("C:\\Venkat_DO\\Code_Base\\SparkWorks\\src\\main\\resources\\data\\feedback.csv")
+    //    val rawRDD = read("src/main/resources/data/feedback.csv")
 
     val pairs = spark.sparkContext.parallelize(List(("aa", 1), ("bb", 2),
       ("aa", 10), ("bb", 20),
@@ -56,7 +56,7 @@ object FeedbackExample {
     ).foreach(println(_))
 
 
-    val rawRDD = spark.sparkContext.textFile("C:\\Venkat_DO\\Code_Base\\SparkWorks\\src\\main\\resources\\data\\feedback.csv")
+    val rawRDD = spark.sparkContext.textFile("src/main/resources/data/feedback.csv")
     val initRDD = toRDD(rawRDD)
 
     val finalRDD = feedbackGroupedRDD(initRDD)

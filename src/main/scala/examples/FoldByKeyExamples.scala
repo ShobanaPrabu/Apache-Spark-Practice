@@ -1,7 +1,7 @@
 package examples
 
 import org.apache.spark.{SparkConf, SparkContext}
-import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.{SQLContext, SparkSession}
 
 /**
   * Created by vdokku on 6/15/2017.
@@ -12,12 +12,15 @@ import org.apache.spark.sql.SQLContext
 object FoldByKeyExamples {
 
   def main(args: Array[String]): Unit = {
+    System.setProperty("hadoop.home.dir", "C:\\hadoop-common-2.2.0-bin-master\\")
 
-    val sparkConf = new SparkConf().setAppName("<<<< FOLD by key test >>>>> ")
-      .setMaster("local[4]")
 
-    val sc = new SparkContext(sparkConf)
-    val sqlContext = new SQLContext(sc)
+    val sparkSession = SparkSession.builder().master("local[4]")
+      .appName("<<<< FOLD by key test >>>>>")
+      .getOrCreate()
+
+    val sc = sparkSession.sparkContext
+    val sqlContext = sparkSession.sqlContext
 
     //Fold in spark
     val employeeData = List(("Jack", 1000.0), ("Bob", 2000.0), ("Carl", 7000.0))

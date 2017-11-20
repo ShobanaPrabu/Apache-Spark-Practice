@@ -1,11 +1,21 @@
 package InsertionSort_Scala
 
+import org.apache.spark.sql.SparkSession
+
 /**
   * Created by vdokku on 10/8/2017.
   */
 object InsertionSort {
 
   def main(args: Array[String]): Unit = {
+
+    val sparkSession = SparkSession.builder().master("local[4]")
+      .appName("<<<< Aggregate by key test >>>>>")
+      .getOrCreate()
+
+    val sc = sparkSession.sparkContext
+    val sqlContext = sparkSession.sqlContext
+
 
     def isort(sampleList: List[Int]): List[Int] = sampleList match {
 

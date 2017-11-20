@@ -1,7 +1,7 @@
 package examples
 
 import org.apache.spark.{SparkConf, SparkContext}
-import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.{SQLContext, SparkSession}
 
 /**
   * Created by vdokku on 6/15/2017.
@@ -15,11 +15,12 @@ object AggregateByKey {
 
   def main(args: Array[String]): Unit = {
 
-    val sparkConf = new SparkConf().setAppName("<<<< Aggregate by key test >>>>> ")
-      .setMaster("local[4]")
+    val sparkSession = SparkSession.builder().master("local[4]")
+      .appName("<<<< Aggregate by key test >>>>>")
+      .getOrCreate()
 
-    val sc = new SparkContext(sparkConf)
-    val sqlContext = new SQLContext(sc)
+    val sc = sparkSession.sparkContext
+    val sqlContext = sparkSession.sqlContext
 
 
     val pairRDD = sc.parallelize(List(("cat", 2), ("cat", 5), ("mouse", 4), ("cat", 12), ("dog", 12), ("mouse", 2)), 2)

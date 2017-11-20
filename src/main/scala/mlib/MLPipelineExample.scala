@@ -28,7 +28,8 @@ object MLPipelineExample {
     val sc = new SparkContext(conf)
 
     val sqlContext = new SQLContext(sc)
-    val data = sqlContext.read.format("libsvm").load("C:\\Venkat_DO\\Code_Base\\SparkWorks\\src\\main\\resources\\data\\sample_multiclass_classification_data.txt")
+    val data = sqlContext.read.format("libsvm").load("src/main/resources/data/sample_multiclass_classification_data" +
+      ".txt")
 
     // By doing the random splitting, we split the data into training (60%) and test (40%)
     //Training dataset will be to TRAIN model & test data is to evalite the model accuracy.

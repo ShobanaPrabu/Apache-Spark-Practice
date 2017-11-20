@@ -81,7 +81,7 @@ Analytic functions	        cume_dist	cumeDist
                             lead	lead
 
 
-     */
+
 
 
     val spark: SparkSession = SparkSession.builder().master("local[4]").appName("QueryingWithStreamingSources").getOrCreate()
@@ -132,7 +132,7 @@ Analytic functions	        cume_dist	cumeDist
     jdbcDF.groupBy("VA_HOSTNAME").agg(count("*")).show()
 
 
-
+*/
 
 
   }

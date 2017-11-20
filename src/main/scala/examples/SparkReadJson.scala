@@ -14,7 +14,7 @@ object SparkReadJson {
       .getOrCreate()
 
 
-    val jsonDF = sparkSession.read.json("C:\\Venkat_DO\\Code_Base\\SparkWorks\\src\\main\\resources\\spark_data\\people.json")
+    val jsonDF = sparkSession.read.json("src/main/resources/spark_data/people.json")
 
     jsonDF.show()
     jsonDF.printSchema()

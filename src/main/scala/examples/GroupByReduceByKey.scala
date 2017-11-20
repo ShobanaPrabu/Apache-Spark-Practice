@@ -1,5 +1,6 @@
 package examples
 
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
@@ -7,8 +8,13 @@ import org.apache.spark.{SparkConf, SparkContext}
   */
 object GroupByReduceByKey {
   def main(args: Array[String]) {
-    val conf = new SparkConf().setAppName("Spark-GroupByKey-ReduceByKey-Example").setMaster("local[4]")
-    val sc = new SparkContext(conf)
+    val sparkSession = SparkSession.builder().master("local[4]")
+      .appName("<<<< Aggregate by key test >>>>>")
+      .getOrCreate()
+
+    val sc = sparkSession.sparkContext
+    val sqlContext = sparkSession.sqlContext
+
     val words = Array("a", "b", "b", "c", "d", "e", "a", "b", "b", "c", "d", "e", "b", "b", "c", "d", "e")
     val wordPairsRDD = sc.parallelize(words).map(word => (word, 1))
 

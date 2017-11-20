@@ -64,9 +64,6 @@ object SparkWindowFunctions {
 
     System.setProperty("hadoop.home.dir", "C:\\Venkata_DO\\hadoop-common-2.2.0-bin-master")
 
-    val conf = new SparkConf().setAppName("Ranking Example")
-      .setMaster("local[4]")
-
     val spark: SparkSession = SparkSession.builder().master("local[4]").appName("QueryingWithStreamingSources").getOrCreate()
     val sc: SparkContext = spark.sparkContext
     import spark.implicits._

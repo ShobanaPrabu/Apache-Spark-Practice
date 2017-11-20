@@ -29,7 +29,7 @@ object Feedback {
 
   /** Main function */
   def main(args: Array[String]): Unit = {
-    val rawRDD = read("C:\\Venkat_Downloads\\SparkWork-master\\src\\main\\resources\\data\\feedback.csv")
+    val rawRDD = read("src/main/resources/data/feedback.csv")
     val initRDD = toRDD(rawRDD)
 
     val finalRDD = feedbackGroupedRDD(initRDD)
